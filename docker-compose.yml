@@ -61,3 +61,12 @@ services:
     command: npm run start:dev
     env_file:
       - ./payments-ms/.env
+
+  #AUTH-MS SERVICE
+  auth-ms:
+    build: ./auth-ms
+    volumes:
+      - ./auth-ms/src:/usr/src/app/src
+    command: npm run start:dev
+    env_file:
+      - ./auth-ms/.env
