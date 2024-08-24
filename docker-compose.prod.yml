@@ -1,0 +1,58 @@
+version: '3.8'
+
+services:
+
+  #NATS SERVER
+  nats-server:
+    image: nats:latest
+
+  #CLIENT-GATEWAY SERVER
+  client-gateway:
+    build:
+      context: ./client-gateway
+      dockerfile: Dockerfile.prod
+    image: client-gateway-prod
+    ports:
+      - 3000:3000
+    env_file:
+      - ./client-gateway/.env
+
+  #PRODUCTS-MS SERVICE
+  products-ms:
+    build:
+      context: ./products-ms
+      dockerfile: Dockerfile.prod
+    image: products-ms-prod
+    env_file:
+      - ./products-ms/.env
+
+  #ORDERS-MS SERVICE
+  orders-ms:
+    build:
+      context: ./orders-ms
+      dockerfile: Dockerfile.prod
+      args:
+        - DATABASE_URL=${DATABASE_URL}
+    image: orders-ms-prod
+    env_file:
+      - ./orders-ms/.env
+
+  #PAYMENTS-MS SERVICE
+  payments-ms:
+    build:
+      context: ./payments-ms
+      dockerfile: Dockerfile.prod
+    image: payments-ms-prod
+    ports:
+      - 3003:3003
+    env_file:
+      - ./payments-ms/.env
+
+  #AUTH-MS SERVICE
+  auth-ms:
+    build:
+      context: ./auth-ms
+      dockerfile: Dockerfile.prod
+    image: auth-ms-prod
+    env_file:
+      - ./auth-ms/.env
