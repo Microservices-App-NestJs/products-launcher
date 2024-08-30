@@ -11,7 +11,7 @@ services:
     build:
       context: ./client-gateway
       dockerfile: Dockerfile.prod
-    image: client-gateway-prod
+    image: us-east1-docker.pkg.dev/microservices-ecommerce-433602/ecommerce-image-registry/client-gateway
     ports:
       - 3000:3000
     env_file:
@@ -22,7 +22,7 @@ services:
     build:
       context: ./products-ms
       dockerfile: Dockerfile.prod
-    image: products-ms-prod
+    image: us-east1-docker.pkg.dev/microservices-ecommerce-433602/ecommerce-image-registry/products-ms
     env_file:
       - ./products-ms/.env
 
@@ -33,7 +33,7 @@ services:
       dockerfile: Dockerfile.prod
       args:
         - DATABASE_URL=${DATABASE_URL}
-    image: orders-ms-prod
+    image: us-east1-docker.pkg.dev/microservices-ecommerce-433602/ecommerce-image-registry/orders-ms
     env_file:
       - ./orders-ms/.env
 
@@ -42,7 +42,7 @@ services:
     build:
       context: ./payments-ms
       dockerfile: Dockerfile.prod
-    image: payments-ms-prod
+    image: us-east1-docker.pkg.dev/microservices-ecommerce-433602/ecommerce-image-registry/payments-ms
     ports:
       - 3003:3003
     env_file:
@@ -53,6 +53,6 @@ services:
     build:
       context: ./auth-ms
       dockerfile: Dockerfile.prod
-    image: auth-ms-prod
+    image: us-east1-docker.pkg.dev/microservices-ecommerce-433602/ecommerce-image-registry/auth-ms
     env_file:
       - ./auth-ms/.env
